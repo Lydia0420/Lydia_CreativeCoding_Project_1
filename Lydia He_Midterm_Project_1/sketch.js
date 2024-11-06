@@ -15,8 +15,8 @@ function setup() {
   drawBottle();
 
   // initial bubble
-  for (let i = 0; i < 20; i++) {
-    bubbles.push(new Bubble(random(180, 380), random(480, 680)));
+  for (let i = 0; i < 5; i++) {
+    bubbles.push(new Bubble(random(180, 370), random(480, 680)));
   }
   
  // initial candy
@@ -50,8 +50,14 @@ function setup() {
     drawBottle();
     drawLabel();   
     pop(); 
+
+ //bubbles
+ if (frameCount % Math.max(10, 100 - dropped * 5) === 0) { // 随糖果增加多泡泡
+  bubbles.push(new Bubble(random(180, 350), random(480, 680)));
+}
   
   for (let i = 0; i < bubbles.length; i++) {
+    bubbles[i].speed = dropped + 1 * 0.5;    
     bubbles[i].move();
     bubbles[i].display();
     
