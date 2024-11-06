@@ -286,6 +286,11 @@ function triggerExplosion() {
 
 //bottle
 function drawBottle() {
+  //bottle shadow
+  fill("#A64F3C7F"); 
+  noStroke();
+  ellipse(275, 690, 290, 60);
+  
   stroke(255); 
   strokeWeight(5); 
   noFill(); 
@@ -330,7 +335,7 @@ function drawBottle() {
   strokeWeight(3);
     
   beginShape();
-  vertex(147, 225); // 波浪线的起点
+  vertex(147, 225); // Start point
   bezierVertex(160, 240, 175, 245, 200, 225); // 第一段波浪
   bezierVertex(208, 220, 220, 220, 230, 225); 
   bezierVertex(260, 240, 270, 240, 285, 225); 
@@ -343,7 +348,7 @@ function drawBottle() {
   endShape();
 
   beginShape();
-  vertex(172, 480); // Start point
+  vertex(174, 480); // Start point
   bezierVertex(102, 630, 174, 680, 184, 678); // Left side of the bottle
   bezierVertex(216, 686, 225, 688, 230, 678); // Bottom curve
   bezierVertex(250, 706, 313, 708, 330, 678); 
@@ -351,37 +356,37 @@ function drawBottle() {
   bezierVertex(378, 679, 446, 628, 375, 478); // Right side of the bottle
   endShape(CLOSE); 
   
-  // Grey drink
-  fill("#E1E1E1"); 
-  stroke("#E1E1E1");
-  strokeWeight(3);
+   // Grey drink
+   fill("#E1E1E1"); 
+   stroke("#E1E1E1");
+   strokeWeight(3);
+   
   beginShape();
-  vertex(147, 224); // 波浪线的起点
-  bezierVertex(160, 240, 175, 245, 200, 225); // 第一段波浪
-  bezierVertex(208, 220, 220, 220, 230, 225); 
-  bezierVertex(260, 240, 270, 240, 285, 225); 
-  bezierVertex(300, 210, 315, 230, 330, 230); 
-  bezierVertex(380, 210, 360, 250, 402, 225); // 第五段波浪
-  
-  bezierVertex(399, 210, 375, 175, 381, 184); 
-   bezierVertex(380, 180, 360, 167, 330, 190); //上面波浪
-   bezierVertex(310, 200, 285, 190, 270, 185); 
-   bezierVertex(245, 175, 240, 185, 230, 190);
-   bezierVertex(218, 200, 205, 200, 198, 195);
-   bezierVertex(170, 170, 168, 195, 166, 189);
-  bezierVertex(153, 210, 150, 215, 147, 224); 
-  endShape();
-  
-  noFill(); 
-  stroke("#d9a59a"); 
-  strokeWeight(3); 
-  arc(170, 220, 10, 3, 0, PI);
-  arc(220, 205, 8, 3, 0, PI);
-  arc(250, 215, 10, 4, 0, PI);
-  arc(300, 208, 10, 4, 0, PI);
-  arc(355, 190, 11, 4, 0, PI);
-  arc(380, 220, 7, 3, 0, PI);
-
+   vertex(147, 224); // Start point
+   bezierVertex(160, 240, 175, 245, 200, 225); // 第一段波浪
+   bezierVertex(208, 220, 220, 220, 230, 225); 
+   bezierVertex(260, 240, 270, 240, 285, 225); 
+   bezierVertex(300, 210, 315, 230, 330, 230); 
+   bezierVertex(380, 210, 360, 250, 402, 225); // 第五段波浪
+   
+   bezierVertex(399, 210, 375, 175, 381, 184); 
+    bezierVertex(380, 180, 360, 167, 330, 190); //上面波浪
+    bezierVertex(310, 200, 285, 190, 270, 185); 
+    bezierVertex(245, 175, 240, 185, 230, 190);
+    bezierVertex(218, 200, 205, 200, 198, 195);
+    bezierVertex(170, 170, 168, 195, 166, 189);
+   bezierVertex(153, 210, 150, 215, 147, 224); 
+   endShape();
+   
+   noFill(); 
+   stroke("#d9a59a"); 
+   strokeWeight(3); 
+   arc(170, 220, 10, 3, 0, PI);
+   arc(220, 205, 8, 3, 0, PI);
+   arc(250, 215, 10, 4, 0, PI);
+   arc(300, 208, 10, 4, 0, PI);
+   arc(355, 190, 11, 4, 0, PI);
+   arc(380, 220, 7, 3, 0, PI);
  // White drink
  fill(255); 
  noStroke();
