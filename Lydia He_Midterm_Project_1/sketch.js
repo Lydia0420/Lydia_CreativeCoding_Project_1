@@ -6,7 +6,9 @@ let explosion = false;
 let dropped = 0; //Number of candies dropped into the bottle
 let bgIntensity = 0; // background color 
 let maxCandies = 5; 
-
+let timer = 30; 
+let startTime;
+let gameOver = false;
 
 function setup() {
   createCanvas(600, 800);
@@ -121,6 +123,70 @@ function setup() {
     }
   }
 }
+
+function drawCircularTimer(timeLeft) {
+  let totalTime = 30;
+  let progress = map(timeLeft, 0, totalTime, 0, 1); // Calculate remaining time
+
+  // bg
+  noFill();
+  stroke(200);
+  strokeWeight(20);
+  ellipse(width - 100, 100, 150, 150);
+
+  // time bar
+  stroke(lerpColor(color(255, 0, 0), color(255, 150, 120), 1 - progress));
+  arc(width - 100, 100, 150, 150, -HALF_PI, -HALF_PI + progress * TWO_PI, OPEN);
+
+  // Digital animation effects
+  let baseSize = 35; // Fixed size for first 20 seconds
+  let maxSize = 120; // last 10s
+  let size = timeLeft > 10 ? baseSize : map(timeLeft, 10, 0, baseSize, maxSize); // Last 10 seconds get big
+    // revolve
+  let rotationAngle = map(sin(frameCount * 0.1), -1, 1, -0.1, 0.1); 
+    // flash
+  let alpha = 255;
+  if (timeLeft < 4) {
+    alpha = map(sin(frameCount * 0.2), -1, 1, 100, 255); 
+  }
+
+  // setting
+  fill(0, alpha);
+  noStroke();
+
+  push();
+  textAlign(CENTER, CENTER);
+  translate(width - 100, 100); 
+  rotate(rotationAngle); 
+  textSize(size); 
+  text(timeLeft, 0, 0);
+  pop();
+}
+
+function handleGameOver() {
+  //显示失败消息
+}
+  
+if (!gameOver && !victory) {
+  let cTime = millis();
+  timer = 30 - Math.floor((cTime - startTime) / 1000);
+
+  // victory
+  if (dropped >= maxCandies) {
+    explosion = true; 
+    victory = true; 
+  }
+
+  // fail
+  if (timer <= 0) {
+    timer = 0;
+    if (!victory) { 
+      gameOver = true;
+      handleGameOver();
+    }
+  }
+
+  drawCircularTimer(timer);
 
 class Candy {
   constructor(x, y, color1, color2) {
