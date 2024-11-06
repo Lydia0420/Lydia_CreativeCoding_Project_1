@@ -17,12 +17,12 @@ function setup() {
     bubbles.push(new Bubble(random(180, 380), random(480, 680)));
   }
   
-  // initial candy
-  candies.push(new Candy(100, 750, '#AAE6FE', '#71C5E8'));
-  candies.push(new Candy(180, 750, '#AEEBDA', '#71E8B4'));
-  candies.push(new Candy(260, 750, '#AAE6FE', '#71C5E8'));
-  candies.push(new Candy(340, 750, '#AAE6FE', '#71C5E8'));
-  candies.push(new Candy(420, 750, '#98FB98', '#00FA9A'));
+ // initial candy
+ candies.push(new Candy(100, 750, '#AAE6FE', '#71C5E8')); 
+ candies.push(new Candy(180, 750, '#AEEBDA', '#71E8B4'));
+ candies.push(new Candy(260, 750, '#FEC5E6', '#FE71A8'));
+ candies.push(new Candy(340, 750, '#FFD700', '#FFA500'));
+ candies.push(new Candy(420, 750, '#98FB98', '#00FA9A'));
  }
 
 function draw() {
