@@ -9,12 +9,15 @@ let maxCandies = 5;
 let timer = 30; 
 let startTime;
 let gameOver = false;
+let stars = [];
 let smileProgress = 0;  // Control of mouth changes
 let duration = 20 * 60; // 30s * 60 frames/sec
+let victory = false;
 
 function setup() {
   createCanvas(600, 800);
   background(255, 150, 120); 
+  startTime = millis(); 
 
   drawBottle();
 
@@ -90,6 +93,7 @@ function setup() {
     triggerExplosion();
     bgIntensity = constrain(bgIntensity + 1, 0, maxCandies); 
     smileProgress = 0;
+    victory = true;
   }
   
   // Spatter
@@ -195,6 +199,31 @@ if (!gameOver && !victory) {
   }
 
   drawCircularTimer(timer);
+
+//stars
+} else {
+  if (victory) {
+    if (frameCount % 5 === 0) { 
+      stars.push(new Star());
+    }
+
+    for (let i = stars.length - 1; i >= 0; i--) {
+      stars[i].move();
+      stars[i].display();
+      // Remove stars that are out of the screen
+      if (stars[i].isOffScreen()) {
+        stars.splice(i, 1);
+      }
+    }
+  } else if (gameOver) {
+      background(0);
+      fill(255, 0, 0);
+      textSize(64);
+      textAlign(CENTER, CENTER);
+      text("Game Over", width / 2, height / 2);
+    }
+  }
+
 
 class Candy {
   constructor(x, y, color1, color2) {
