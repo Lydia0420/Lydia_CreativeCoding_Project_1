@@ -4,6 +4,8 @@ let spatters = [];
 let explosionBubbles = [];
 let explosion = false; 
 let dropped = 0; //Number of candies dropped into the bottle
+let bgIntensity = 0; // background color 
+let maxCandies = 5; 
 
 
 function setup() {
@@ -25,10 +27,16 @@ function setup() {
  candies.push(new Candy(420, 750, '#98FB98', '#00FA9A'));
  }
 
-function draw() {
-  background(255, 150, 120);
+ function draw() {
+  // background(255, 150, 120);
+  let startColor = color(255, 150, 120); 
+  let endColor = color(120, 0, 0); 
+  let bgColor = lerpColor(startColor, endColor, map(bgIntensity, 0, maxCandies, 0, 1));
+
+  background(bgColor);
   drawBottle();
   
+  //Bottle Vibrations
   let offsetX = 0;
   let offsetY = 0;
 
@@ -53,21 +61,26 @@ function draw() {
     }
   }
   
+  //background color
+  if (dropped > 0 && !explosion) {
+    bgIntensity = dropped;
+  } 
+
   // Check if all the candies fall into the bottle
   if (dropped >= 5 && !explosion) {
-    // triggerExplosion(); // 触发爆发效果
     explosion = true;     // Trigger explosion effect
   }
   
   if (explosion) {
     triggerExplosion();
+    bgIntensity = constrain(bgIntensity + 1, 0, maxCandies); 
   }
   
   // Spatter
   for (let i = spatters.length - 1; i >= 0; i--) {
     spatters[i].move();
     spatters[i].display();
-    // 移除已经完成的颗粒
+    // 移除粒子
     if (spatters[i].isFinished()) {
       spatters.splice(i, 1);
     }
@@ -77,7 +90,7 @@ function draw() {
   for (let i = explosionBubbles.length - 1; i >= 0; i--) {
     explosionBubbles[i].move();
     explosionBubbles[i].display();
-    // 移除消失的气泡
+    // 移除泡泡
     if (explosionBubbles[i].isFinished()) {
       explosionBubbles.splice(i, 1);
     }
@@ -122,6 +135,7 @@ class Candy {
     bezierVertex(this.x - 20, this.y + 50, this.x + 100, this.y + 30, this.x + 80, this.y);    // dpwn half
     bezierVertex(this.x + 65, this.y - 30, this.x + 10, this.y - 20, this.x, this.y);         // up half
     endShape(CLOSE);
+
     fill(this.color2); 
     beginShape();
     vertex(this.x - 2, this.y + 5);
@@ -163,7 +177,6 @@ class Candy {
 
   isOutOfBottle() {
     let bottleCapY = 75; 
-    // return this.y > bottleCapY && this.falling; // 如果糖果掉落并超过瓶口位置，移除糖果
     if (this.y > bottleCapY && this.falling) {
       // spatter effect
       for (let i = 0; i < 15; i++) { 
@@ -272,7 +285,7 @@ class ExplosionBubble {
 }
 
 function triggerExplosion() {
-  // 生成大量气泡从瓶口喷出
+  // 泡泡从瓶口喷出
   let bottleCapXStart = 210; 
   let bottleCapXEnd = 320; 
   for (let i = 0; i < 100; i++) {
