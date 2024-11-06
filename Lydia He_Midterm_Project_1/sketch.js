@@ -9,6 +9,8 @@ let maxCandies = 5;
 let timer = 30; 
 let startTime;
 let gameOver = false;
+let smileProgress = 0;  // Control of mouth changes
+let duration = 20 * 60; // 30s * 60 frames/sec
 
 function setup() {
   createCanvas(600, 800);
@@ -37,6 +39,11 @@ function setup() {
 
   background(bgColor);
   drawBottle();
+
+  //smile
+  let Time = millis();
+  smileProgress = map(Time - startTime, 0, duration * (1000 / 60), 0, 1);
+  smileProgress = constrain(smileProgress, 0, 1);  
   
   //Bottle Vibrations
   let offsetX = 0;
@@ -82,6 +89,7 @@ function setup() {
   if (explosion) {
     triggerExplosion();
     bgIntensity = constrain(bgIntensity + 1, 0, maxCandies); 
+    smileProgress = 0;
   }
   
   // Spatter
@@ -502,8 +510,17 @@ function drawLabel() {
   ellipse(260, 390, 10, 10); // left
   ellipse(290, 390, 10, 10); // right
    // mouth
-  noFill(); 
-  stroke(0); 
-  strokeWeight(3); 
-  arc(275, 405, 40, 30, 0, PI);
-}  
+   noFill(); 
+   stroke(0); 
+   strokeWeight(4); 
+   // arc(275, 405, 40, 30, 0, PI);
+ 
+   let smileOffset = map(smileProgress, 0, 1, 20, -20); // smile level
+   let yOffset = map(smileProgress, 0, 1, 0, 10); 
+ 
+   beginShape();
+   vertex(255, 405 + yOffset); // left point
+   bezierVertex(258, 405 + smileOffset + yOffset, 292, 405 + smileOffset + yOffset, 295, 405 + yOffset); // Control points & right point
+   endShape();
+ 
+ }  
