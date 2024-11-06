@@ -381,6 +381,21 @@ function drawBottle() {
   arc(300, 208, 10, 4, 0, PI);
   arc(355, 190, 11, 4, 0, PI);
   arc(380, 220, 7, 3, 0, PI);
+
+ // White drink
+ fill(255); 
+ noStroke();
+ 
+beginShape();
+ vertex(380, 180); // 波浪线的起点
+  bezierVertex(380, 180, 360, 167, 330, 189); //下面波浪
+  bezierVertex(310, 200, 285, 190, 270, 185); 
+  bezierVertex(245, 175, 240, 185, 230, 190);
+  bezierVertex(218, 200, 205, 200, 198, 195);
+  bezierVertex(170, 170, 168, 195, 160, 188);
+   bezierVertex(170, 180, 180, 150, 227, 130); //左弧线
+   bezierVertex(227, 130, 300, 130, 334, 132); //上
+ endShape();
 }
 
 // blue label
