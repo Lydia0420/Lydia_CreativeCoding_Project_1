@@ -338,16 +338,17 @@ class Spatter {
 }
 
 class Bubble {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.size = random(10, 20);
-    this.speed = random(1, 3);   
+  constructor(x, y) {
+    this.x = x || random(180, 350);
+    this.y = y;
+    this.size = random(10, 20);
+    this.speed = random(1, 3);   
   }
   
-  move() {
-    this.y -= this.speed; // Bubbles move up
-    this.size += 0.05;    // Bubbles get bigger
+  move() {
+    this.y -= this.speed; // Bubbles move up
+    // this.size += 0.06;    // Bubbles get bigger
+    this.size = map(this.y, 680, 225, 7, 35); 
   }
 
   display() {
@@ -359,9 +360,29 @@ class Bubble {
   reset() {
     // Reset bubble position
     this.y = random(480, 680); 
-    this.x = random(180, 375); 
+    this.x = random(180, 350); 
     this.size = random(10, 20); 
     this.speed = random(1, 3); 
+  }
+}
+
+class Star {
+  constructor() {
+    this.x = random(0, width);
+    this.y = random(-100, -10); 
+    this.size = random(5, 10); 
+    this.speed = random(1, 3); 
+  }
+  move() {
+    this.y += this.speed; 
+  }
+  display() {
+    noStroke();
+    fill(255, 255, 0); 
+    ellipse(this.x, this.y, this.size);
+  }
+  isOffScreen() {
+    return this.y > height; 
   }
 }
 
@@ -403,7 +424,6 @@ function triggerExplosion() {
     explosionBubbles.push(new ExplosionBubble(x, y)); 
   }
 }
-
 
 
 //bottle
