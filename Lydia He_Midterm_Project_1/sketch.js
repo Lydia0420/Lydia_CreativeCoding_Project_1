@@ -6,7 +6,7 @@ let explosion = false;
 let dropped = 0; //Number of candies dropped into the bottle
 let bgIntensity = 0; // background color 
 let maxCandies = 5; 
-let timer = 30; 
+let timer = 20; 
 let startTime;
 let gameOver = false;
 let stars = [];
@@ -137,7 +137,7 @@ function setup() {
 }
 
 function drawCircularTimer(timeLeft) {
-  let totalTime = 30;
+  let totalTime = 20;
   let progress = map(timeLeft, 0, totalTime, 0, 1); // Calculate remaining time
 
   // bg
@@ -181,7 +181,7 @@ function handleGameOver() {
   
 if (!gameOver && !victory) {
   let cTime = millis();
-  timer = 30 - Math.floor((cTime - startTime) / 1000);
+  timer = 20 - Math.floor((cTime - startTime) / 1000);
 
   // victory
   if (dropped >= maxCandies) {
